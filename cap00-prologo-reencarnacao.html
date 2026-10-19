@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prólogo: Reencarnação — Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</title>
+<style>
+:root { --fundo: #faf8f3; --texto: #23201b; --suave: #6b6458;
+        --linha: #ddd6c8; --botao: #2f5d50; --botao-texto: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #161513; --texto: #e8e3d9; --suave: #a39b8c;
+          --linha: #34312c; --botao: #7fb8a4; --botao-texto: #10201b; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 1.125rem/1.7 Georgia, 'Times New Roman', serif; }
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+a { color: inherit; }
+.obra { display: block; font-size: .9rem; line-height: 1.4;
+        color: var(--suave); text-decoration: none; }
+.rotulo { margin: 2rem 0 0; font-size: .85rem; letter-spacing: .12em;
+          color: var(--suave); font-weight: normal; }
+h1, h2 { line-height: 1.3; }
+h1 { margin: .25rem 0 1.5rem; font-size: 1.6rem; }
+h2 { margin: 2.5rem 0 .5rem; font-size: 1.2rem; }
+.copiar { position: sticky; top: 0; z-index: 1; display: flex; gap: .5rem;
+          padding: .6rem 0; background: var(--fundo);
+          border-bottom: 1px solid var(--linha); }
+.copiar button { flex: 1; padding: .7rem .5rem; border: 0;
+                 border-radius: .5rem; background: var(--botao);
+                 color: var(--botao-texto);
+                 font: 600 .95rem system-ui, sans-serif; }
+.pov { color: var(--suave); }
+.cena { margin: 2rem 0; color: var(--suave); }
+nav.passos { display: flex; justify-content: space-between; gap: 1rem;
+             margin-top: 3rem; padding-top: 1rem;
+             border-top: 1px solid var(--linha); font-size: .95rem; }
+ol.sumario { padding-left: 0; list-style: none; }
+ol.sumario li { padding: .4rem 0; border-bottom: 1px solid var(--linha); }
+ol.sumario .n { display: inline-block; min-width: 4.5rem;
+                color: var(--suave); font-size: .9rem; }
+.vazio, .nota { color: var(--suave); }
+</style>
+<script>
+function copiar(id, botao) {
+  var el = document.getElementById(id);
+  var rotulo = botao.textContent;
+  function fim(texto) {
+    botao.textContent = texto;
+    setTimeout(function () { botao.textContent = rotulo; }, 3000);
+  }
+  function selecionar() {
+    var r = document.createRange();
+    r.selectNodeContents(el);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    if (ok) { s.removeAllRanges(); fim('Copiado ✓'); }
+    else { fim('Selecionado: toque em Copiar'); }
+  }
+  if (navigator.clipboard && window.ClipboardItem) {
+    var item = new ClipboardItem({
+      'text/html': new Blob([el.innerHTML], {type: 'text/html'}),
+      'text/plain': new Blob([el.innerText], {type: 'text/plain'})
+    });
+    navigator.clipboard.write([item]).then(function () { fim('Copiado ✓'); },
+                                           selecionar);
+  } else {
+    selecionar();
+  }
+}
+</script>
+</head>
+<body>
+<main>
+<a class="obra" href="index.html">Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</a>
+<p class="rotulo">CAPÍTULO 0</p>
+<h1 id="titulo">Prólogo: Reencarnação</h1>
+<div class="copiar"><button type="button" onclick="copiar('titulo', this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
+<article id="texto">
+<p class="pov"><strong>Lucas · 86</strong></p>
+<p>Contei catorze pessoas num quarto de hospital que cabe seis.</p>
+<p><em>Bip.</em></p>
+<p>Filho, nora, netos, bisnetos, e dois homens da firma que atravessaram o estado para me ver assim.</p>
+<p>Discutiam quem ia dormir ali naquela noite, como se a vaga fosse prêmio.</p>
+<p>— Eu quero o vovô Lucas comigo amanhã — disse o mais novo dos bisnetos, com a birra dos quatro anos.</p>
+<p>— Ele ainda vai estar aqui amanhã, filhotinho.</p>
+<p><em>Ainda.</em></p>
+<p><em>Bip.</em></p>
+<p>Passei a vida inteira odiando repetição.</p>
+<p>Relógio de parede, torneira pingando, o teclado do vizinho de mesa.</p>
+<p>E ali estava uma máquina contando o meu tempo em voz alta, e eu não queria que ela parasse.</p>
+<p>Um dos homens da firma contou uma história do nosso tempo e errou o nome de quem tinha ficado até tarde comigo.</p>
+<p>Eu sabia o nome. Não consegui entrar na conversa.</p>
+<p><em>Bip.</em></p>
+<p>O corpo começou a desligar no meio da tarde.</p>
+<p>Uma casa apagando a luz de um cômodo por vez, sem dor nenhuma.</p>
+<p>Primeiro os pés. Depois o frio na mão, e depois nem o frio, porque a mão tinha ido embora com ele.</p>
+<p>Eu fiquei com medo.</p>
+<p>Quis chamar meu filho para mais perto, e fiquei tentando até esquecer o que se faz para chamar alguém.</p>
+<p><em>Bip.</em></p>
+<p>Me concentrei na voz dele, até as palavras pararem de ser palavras, do jeito que fica conversa de sala para quem dormiu no sofá.</p>
+<p><em>Adeus, pessoal. Amo vocês.</em></p>
+<p>Era o certo a dizer. Não saiu.</p>
+<p><em>Bip.</em></p>
+<p>A minha vida foi comum e foi feliz.</p>
+<p>Eu queria ficar mais um pouco.</p>
+<p><strong>Biiiiiiiiii.</strong></p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Sem corpo. Sem quarto. Sem o bip.</p>
+<p>Havia quatro presenças, enormes e paradas, prestando atenção em mim.</p>
+<p>Não deu medo. Deu paz, do jeito que dá paz estar no lugar certo.</p>
+<p>— Você morreu mesmo — disse uma delas, dentro da minha cabeça, antes que eu perguntasse.</p>
+<p><em>Será que estou delirando?</em></p>
+<p>— Não está. Somos os deuses dos mundos.</p>
+<p>Tentei ouvir meu filho outra vez. Nada daquele quarto tinha vindo comigo.</p>
+<p>Fui separando as quatro pelo jeito, que era o que eu tinha.</p>
+<p>A que me lembra a calma. A que me lembra um abraço. A que ardia como sol e era firme como músculo. E a que me lembra uma boa noite com os amigos.</p>
+<p>— Você terá outra vida em outro mundo — disse a de sol.</p>
+<p>— Então eu tenho uma missão?</p>
+<p>— Não — disse a da boa noite com os amigos. — Apenas queremos fazer isso.</p>
+<p>Fiquei esperando o resto. Não veio resto.</p>
+<p>— Aquele mundo é selvagem — disse a que ardia. — E há muitas guerras, algumas em nosso nome.</p>
+<p>— Não temos muito interesse pelo que os humanos fazem, nem por como nos chamam — disse a calma.</p>
+<p>— Gostamos é da fé deles — disse a do abraço.</p>
+<p>— Não temos orgulho, nem raiva, nem amor, nem ódio. Talvez sejamos mais próximos de uma força da natureza do que de humanos.</p>
+<p><em>Mas será que lá tem magia? Dragão, essas coisas de jogo e de anime?</em></p>
+<p>— Não existe magia nos mundos — disse a calma, com uma impaciência evidente. — Não como você deseja.</p>
+<p><em>Não têm raiva nem ódio, mas têm impaciência.</em></p>
+<p>E as quatro… Gargalharam? Foi uma sensação que atravessou todo o meu ser. Como um arrepio.</p>
+<p>— Porque queremos, vamos fazer você especial — disse a calma. — Eu vou te conceder todas as dádivas que podemos. Esta é a magia dos mundos. Na Terra vocês chamavam isso de genialidade: Matusalém, Alexandre, Leonardo da Vinci, Einstein, Pelé.</p>
+<p>— Na Terra isso era muito mal aproveitado — completou a que ardia. — Todas vamos te dar as nossas.</p>
+<p>— Viva uma vida plena — disseram juntas, e acabou.</p>
+<p>Elas continuaram por perto. Só não estavam mais interessadas.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Depois houve um corpo, e eu vinha nele em pedaços.</p>
+<p>Um coração batendo perto demais. Mãos que eu não mandava. Pernas dobradas num lugar apertado.</p>
+<p>E vinha uma coisa que não era minha.</p>
+<p>Medo. Frustração. Raiva. Sentimento de outra pessoa, ligada a mim por todos os lados, atravessando para dentro como o frio atravessa parede.</p>
+<p>Depois ela largou, de uma vez, o corpo inteiro. Logo em seguida eu nasci.</p>
+<p>O que era aquilo, eu só entendi anos depois. Estes registros começam antes de eu saber.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Nos primeiros dias, eu tinha consciência uns minutos por vez, e usava os minutos para escutar.</p>
+<p>Duas mulheres estavam sempre por perto. Rosa e Marta.</p>
+<p>A língua entrou com uma facilidade que não era minha. Em semanas eu entendia boa parte do que diziam.</p>
+<p>Foi numa troca de pano que entendi o resto sobre o corpo.</p>
+<p>A Rosa levantou minhas pernas. Eu olhei.</p>
+<p><em>Menina.</em></p>
+<p>— Sossega, Lucca. Já acabou.</p>
+<p>Não tinha acabado. Eu tinha várias perguntas.</p>
+<p>As duas me chamavam de Lucca e nunca de filha. Nenhuma era minha mãe.</p>
+<p>Quando a casa ficava quieta, eu tentava lembrar a voz do meu filho, e ficava repetindo meu nome do jeito que ele dizia até dormir.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>O primeiro problema que consegui explicar nesta vida foi o leite.</p>
+<p>Veio morno e cru, numa tigela de barro, cheirando ao bicho de onde saiu.</p>
+<p>— Não… — forcei as cordas novas, uma palavra por vez. — Fogo… leite… antes…</p>
+<p>A Rosa tentou de novo. Eu fechei a boca e chorei, que aquele corpo queria chorar por qualquer coisa e só precisava de licença.</p>
+<p>Ela cedeu e virou a tigela numa panela de ferro, sobre as brasas.</p>
+<p>— Sim — eu disse, com toda a clareza que deu.</p>
+<p>— Pelos Deuses, Marta! — a Rosa deixou o pano cair. — Ela está falando!</p>
+<p>— Não inventa, Rosa. Ninguém fala com essa idade.</p>
+<p>Enquanto discutiam, a Rosa me ajeitou no colo, de costas para o fogo, e o braço dela não me deixou virar.</p>
+<p>— Cuidado. Derrama.</p>
+<p>A Marta deu um grito agudo e caiu de joelhos.</p>
+<p>— Por Vita! O bebê teve uma revelação divina de que o leite no fogo derrama! É milagre da Deusa da Vida!</p>
+<p>Ainda deu tempo de a Marta levantar e tirar a panela.</p>
+<p>Daquele dia em diante a minha comida foi fervida com rigor religioso, no sentido exato da palavra.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>A casa era pequena, de gente que trabalha. E havia uma senhora que vinha me ver, que as empregadas chamavam de Madame, e que se vestia de um jeito que não combinava com aquele corredor.</p>
+<p>Na primeira visita depois do leite, a Rosa mal esperou que ela sentasse.</p>
+<p>— Fala, Lucca. Fala para a Madame ouvir.</p>
+<p>— Que é? — perguntei, de olho numa coisa brilhante presa na roupa dela.</p>
+<p>A Madame olhou para a Rosa.</p>
+<p>— Ainda não tem seis meses?</p>
+<p>A Rosa confirmou e contou o caso da panela inteiro. A Madame ficou encantada.</p>
+<p>— Ela é inteligente como o Lucca, o menino do livro que eu li. E de onde eu tirei o nome dela.</p>
+<p><em>Livros.</em></p>
+<p>Eu quis perguntar onde estavam. Ela já tinha juntado as duas mulheres perto do berço, e a voz mudou.</p>
+<p>— Ninguém pode ficar sabendo disso. Se a Igreja descobrir, vão querer levar a nossa Luquinha. A Inquisição chama criança assim de prodígio selvagem, e prodígio selvagem acaba de hábito cinza, numa casa da Ordem. Nem o Conde, nem os guardas dele podem saber.</p>
+<p>Decorei os três nomes na ordem em que me assustaram: Inquisição, Conde e guardas.</p>
+<p>Depois que a Madame saiu, a Rosa ficou olhando o berço.</p>
+<p>— E se a gente não entregar?</p>
+<p>— Fala baixo. — A Marta olhou para a porta. — A Inquisição queima gente, Rosa.</p>
+<p>Eu fiquei quieta também.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Meses depois, com mais vocabulário, tentei o poço.</p>
+<p>— Marta… água está ruim… precisa ferver.</p>
+<p>— Mas Lucca, essa água é do poço aqui perto. Está limpinha.</p>
+<p><em>Parece limpinha. Criança morre de água limpinha.</em></p>
+<p>— Mesmo limpa… pode ter… o mal.</p>
+<p>Tentei mostrar com os dedos uma coisa pequena, mas a Marta já estava olhando para cima. Decidiu que era revelação divina, e com revelação divina ela não discute.</p>
+<p>Ferveu a água. A Rosa, que tinha uma menina da minha idade, a Gema, ficou olhando a panela.</p>
+<p>— Se serve para a Lucca, serve para a Gema.</p>
+<p>Levou o costume para casa naquela noite. No outro dia, contou na cozinha que uma vizinha tinha estranhado a lenha gasta com água.</p>
+<p>— E você respondeu o quê? — perguntou a Marta.</p>
+<p>— Que a gente ferve antes de beber, e que ela fizesse o mesmo.</p>
+<p>— E quem ensinou, ela não quis saber?</p>
+<p>— Mandei experimentar.</p>
+<p>A Rosa não olhou para mim. Em duas semanas a vila inteira fervia o que bebia, e ninguém me perguntou nada.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>À noite, no escuro do berço, eu fazia a revisão do dia, que era o único trabalho que aquele corpo me deixava ter.</p>
+<p>Um mundo novo. Um corpo pequeno de menina. Duas mulheres boas. Uma Madame. E uma Igreja que podia me levar embora.</p>
+<p>Eu tinha aprendido a esperar a visita sair para abrir a boca.</p>
+<p>Por baixo de tudo, o tempo inteiro, as quatro presenças enormes e quietas, sem dar bola para ninguém.</p>
+<p>Eu não sabia para que elas me queriam. Elas mesmas disseram que não me queriam para nada.</p>
+<p>Mas quando eu ficava muito quieta e agradecia, o silêncio ocupava espaço. E a presença delas me alcançava e me confortava.</p>
+<p>E eu dormia bem.</p>
+</article>
+<nav class="passos"><span></span><a href="index.html">sumário</a><span></span></nav>
+</main>
+</body>
+</html>
