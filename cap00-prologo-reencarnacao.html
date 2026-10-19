@@ -23,9 +23,11 @@ a { color: inherit; }
 h1, h2 { line-height: 1.3; }
 h1 { margin: .25rem 0 1.5rem; font-size: 1.6rem; }
 h2 { margin: 2.5rem 0 .5rem; font-size: 1.2rem; }
-.copiar { position: sticky; top: 0; z-index: 1; display: flex; gap: .5rem;
-          padding: .6rem 0; background: var(--fundo);
-          border-bottom: 1px solid var(--linha); }
+.copiar, .so-autor { display: none; }
+.autor .so-autor { display: block; }
+.autor .copiar { position: sticky; top: 0; z-index: 1; display: flex;
+                 gap: .5rem; padding: .6rem 0; background: var(--fundo);
+                 border-bottom: 1px solid var(--linha); }
 .copiar button { flex: 1; padding: .7rem .5rem; border: 0;
                  border-radius: .5rem; background: var(--botao);
                  color: var(--botao-texto);
@@ -42,6 +44,20 @@ ol.sumario .n { display: inline-block; min-width: 4.5rem;
 .vazio, .nota { color: var(--suave); }
 </style>
 <script>
+(function () {
+  var q = location.search, chave = 'lucca-webnovel-autor', ligado = false;
+  var autor = /[?&]autor(?:[=&]|$)/.test(q);
+  var leitor = /[?&]leitor(?:[=&]|$)/.test(q);
+  try {
+    if (autor) { localStorage.setItem(chave, '1'); }
+    if (leitor) { localStorage.removeItem(chave); }
+    ligado = localStorage.getItem(chave) === '1';
+  } catch (e) {}
+  if (autor) { ligado = true; }
+  if (leitor) { ligado = false; }
+  if (ligado) { document.documentElement.className += ' autor'; }
+})();
+
 function copiar(id, botao) {
   var el = document.getElementById(id);
   var rotulo = botao.textContent;
