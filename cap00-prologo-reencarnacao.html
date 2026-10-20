@@ -18,6 +18,8 @@ main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 a { color: inherit; }
 .obra { display: block; font-size: .9rem; line-height: 1.4;
         color: var(--suave); text-decoration: none; }
+.capa { display: block; width: 100%; height: auto; margin: 1.25rem 0 0;
+        border-radius: .5rem; }
 .rotulo { margin: 2rem 0 0; font-size: .85rem; letter-spacing: .12em;
           color: var(--suave); font-weight: normal; }
 h1, h2 { line-height: 1.3; }
@@ -58,13 +60,17 @@ ol.sumario .n { display: inline-block; min-width: 4.5rem;
   if (ligado) { document.documentElement.className += ' autor'; }
 })();
 
+function aviso(botao, texto) {
+  if (!botao.getAttribute('data-rotulo')) {
+    botao.setAttribute('data-rotulo', botao.textContent);
+  }
+  botao.textContent = texto;
+  setTimeout(function () {
+    botao.textContent = botao.getAttribute('data-rotulo');
+  }, 3000);
+}
 function copiar(id, botao) {
   var el = document.getElementById(id);
-  var rotulo = botao.textContent;
-  function fim(texto) {
-    botao.textContent = texto;
-    setTimeout(function () { botao.textContent = rotulo; }, 3000);
-  }
   function selecionar() {
     var r = document.createRange();
     r.selectNodeContents(el);
@@ -73,18 +79,41 @@ function copiar(id, botao) {
     s.addRange(r);
     var ok = false;
     try { ok = document.execCommand('copy'); } catch (e) {}
-    if (ok) { s.removeAllRanges(); fim('Copiado ✓'); }
-    else { fim('Selecionado: toque em Copiar'); }
+    if (ok) { s.removeAllRanges(); aviso(botao, 'Copiado ✓'); }
+    else { aviso(botao, 'Selecionado: toque em Copiar'); }
   }
   if (navigator.clipboard && window.ClipboardItem) {
     var item = new ClipboardItem({
       'text/html': new Blob([el.innerHTML], {type: 'text/html'}),
       'text/plain': new Blob([el.innerText], {type: 'text/plain'})
     });
-    navigator.clipboard.write([item]).then(function () { fim('Copiado ✓'); },
-                                           selecionar);
+    navigator.clipboard.write([item]).then(
+      function () { aviso(botao, 'Copiado ✓'); }, selecionar);
   } else {
     selecionar();
+  }
+}
+function copiarTitulo(botao) {
+  var texto = botao.getAttribute('data-titulo');
+  function antigo() {
+    var a = document.createElement('textarea');
+    a.value = texto;
+    a.setAttribute('readonly', '');
+    a.style.position = 'fixed';
+    a.style.opacity = '0';
+    document.body.appendChild(a);
+    a.select();
+    a.setSelectionRange(0, texto.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(a);
+    aviso(botao, ok ? 'Copiado ✓' : 'Não copiou');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(
+      function () { aviso(botao, 'Copiado ✓'); }, antigo);
+  } else {
+    antigo();
   }
 }
 </script>
@@ -92,9 +121,10 @@ function copiar(id, botao) {
 <body>
 <main>
 <a class="obra" href="index.html">Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</a>
+<img class="capa" src="img/00-prologo-reencarnacao.jpg" alt="Ilustração do capítulo: Prólogo: Reencarnação">
 <p class="rotulo">CAPÍTULO 0</p>
-<h1 id="titulo">Prólogo: Reencarnação</h1>
-<div class="copiar"><button type="button" onclick="copiar('titulo', this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
+<h1>Prólogo: Reencarnação</h1>
+<div class="copiar"><button type="button" data-titulo="Capítulo 0 — Prólogo: Reencarnação" onclick="copiarTitulo(this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
 <article id="texto">
 <p class="pov"><strong>Lucas · 86</strong></p>
 <p>Contei catorze pessoas num quarto de hospital que cabe seis.</p>
