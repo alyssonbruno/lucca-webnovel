@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A morte da mulher do final do corredor — Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</title>
+<style>
+:root { --fundo: #faf8f3; --texto: #23201b; --suave: #6b6458;
+        --linha: #ddd6c8; --botao: #2f5d50; --botao-texto: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #161513; --texto: #e8e3d9; --suave: #a39b8c;
+          --linha: #34312c; --botao: #7fb8a4; --botao-texto: #10201b; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 1.125rem/1.7 Georgia, 'Times New Roman', serif; }
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+a { color: inherit; }
+.obra { display: block; font-size: .9rem; line-height: 1.4;
+        color: var(--suave); text-decoration: none; }
+.capa { display: block; width: 100%; height: auto; margin: 1.25rem 0 0;
+        border-radius: .5rem; }
+.rotulo { margin: 2rem 0 0; font-size: .85rem; letter-spacing: .12em;
+          color: var(--suave); font-weight: normal; }
+h1, h2 { line-height: 1.3; }
+h1 { margin: .25rem 0 1.5rem; font-size: 1.6rem; }
+h2 { margin: 2.5rem 0 .5rem; font-size: 1.2rem; }
+.copiar, .so-autor { display: none; }
+.autor .so-autor { display: block; }
+.autor .copiar { position: sticky; top: 0; z-index: 1; display: flex;
+                 gap: .5rem; padding: .6rem 0; background: var(--fundo);
+                 border-bottom: 1px solid var(--linha); }
+.copiar button { flex: 1; padding: .7rem .5rem; border: 0;
+                 border-radius: .5rem; background: var(--botao);
+                 color: var(--botao-texto);
+                 font: 600 .95rem system-ui, sans-serif; }
+.pov { color: var(--suave); }
+.cena { margin: 2rem 0; color: var(--suave); }
+nav.passos { display: flex; justify-content: space-between; gap: 1rem;
+             margin-top: 3rem; padding-top: 1rem;
+             border-top: 1px solid var(--linha); font-size: .95rem; }
+ol.sumario { padding-left: 0; list-style: none; }
+ol.sumario li { padding: .4rem 0; border-bottom: 1px solid var(--linha); }
+ol.sumario .n { display: inline-block; min-width: 4.5rem;
+                color: var(--suave); font-size: .9rem; }
+.vazio, .nota { color: var(--suave); }
+</style>
+<script>
+(function () {
+  var q = location.search, chave = 'lucca-webnovel-autor', ligado = false;
+  var autor = /[?&]autor(?:[=&]|$)/.test(q);
+  var leitor = /[?&]leitor(?:[=&]|$)/.test(q);
+  try {
+    if (autor) { localStorage.setItem(chave, '1'); }
+    if (leitor) { localStorage.removeItem(chave); }
+    ligado = localStorage.getItem(chave) === '1';
+  } catch (e) {}
+  if (autor) { ligado = true; }
+  if (leitor) { ligado = false; }
+  if (ligado) { document.documentElement.className += ' autor'; }
+})();
+
+function aviso(botao, texto) {
+  if (!botao.getAttribute('data-rotulo')) {
+    botao.setAttribute('data-rotulo', botao.textContent);
+  }
+  botao.textContent = texto;
+  setTimeout(function () {
+    botao.textContent = botao.getAttribute('data-rotulo');
+  }, 3000);
+}
+function copiar(id, botao) {
+  var el = document.getElementById(id);
+  function selecionar() {
+    var r = document.createRange();
+    r.selectNodeContents(el);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    if (ok) { s.removeAllRanges(); aviso(botao, 'Copiado ✓'); }
+    else { aviso(botao, 'Selecionado: toque em Copiar'); }
+  }
+  if (navigator.clipboard && window.ClipboardItem) {
+    var item = new ClipboardItem({
+      'text/html': new Blob([el.innerHTML], {type: 'text/html'}),
+      'text/plain': new Blob([el.innerText], {type: 'text/plain'})
+    });
+    navigator.clipboard.write([item]).then(
+      function () { aviso(botao, 'Copiado ✓'); }, selecionar);
+  } else {
+    selecionar();
+  }
+}
+function copiarTitulo(botao) {
+  var texto = botao.getAttribute('data-titulo');
+  function antigo() {
+    var a = document.createElement('textarea');
+    a.value = texto;
+    a.setAttribute('readonly', '');
+    a.style.position = 'fixed';
+    a.style.opacity = '0';
+    document.body.appendChild(a);
+    a.select();
+    a.setSelectionRange(0, texto.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(a);
+    aviso(botao, ok ? 'Copiado ✓' : 'Não copiou');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(
+      function () { aviso(botao, 'Copiado ✓'); }, antigo);
+  } else {
+    antigo();
+  }
+}
+</script>
+</head>
+<body>
+<main>
+<a class="obra" href="index.html">Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</a>
+<img class="capa" src="img/01-a-morte-da-mulher-do-final-do-corredor.jpg" alt="Ilustração do capítulo: A morte da mulher do final do corredor">
+<p class="rotulo">CAPÍTULO 1</p>
+<h1>A morte da mulher do final do corredor</h1>
+<div class="copiar"><button type="button" data-titulo="Capítulo 1 — A morte da mulher do final do corredor" onclick="copiarTitulo(this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
+<article id="texto">
+<p class="pov"><strong>Lucca · 3 anos · janeiro de 2943</strong></p>
+<p>Três mulheres, dois fornos, um poço e um corredor com três portas — a minha, a da Marta e a do fim, que fica trancada.</p>
+<p>Aos três anos eu já tinha esta casa inteira na cabeça, e naquela madrugada passei por ela outra vez, deitada, esperando o sol.</p>
+<p>Levantei para a oração da manhã, de olhos fechados, até sentir as deusas — do mesmo jeito que se sente gente ao lado, sem olhar.</p>
+<p>Depois arrumei a cama. O hábito atravessou a morte comigo, e a Marta diz que isso só pode ser revelação divina.</p>
+<p>— Será que arrumar cama conta como revelação divina? — perguntei, meio para elas, meio de brincadeira.</p>
+<p>E ri sozinha, porque entendi que sim: quando pergunto de verdade, o silêncio muda de forma. Ninguém acredita em mim sobre isso. Eu não conto mais.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>— Lucca já acordou?</p>
+<p>— Já sim, Marta!</p>
+<p>Antes de ajudar no forno, saí à casinha das necessidades, colada ao muro. Por dentro há um ferro num cordão, para bater se desce bicho do mato; naquela manhã, ficou pendurado atrás de mim.</p>
+<p>Abri a porta e tinha um homem na minha frente.</p>
+<p>Adulto, grande, cheirando a álcool. A nuvem saiu da frente da lua e mostrou a roupa cara, a espada no cinto e a aura.</p>
+<p>Eu vejo a intenção das pessoas em cor, desde sempre, sem pedir. A dele era um vermelho perigoso misturado com uma cor de vinho escuro que eu nunca tinha visto em ninguém. Achei o vinho escuro repulsivo.</p>
+<p>Só existia um homem que entrava ali sem pedir licença.</p>
+<p>— Socorro! É o Conde! — gritei, o mais alto que um peito de três anos deixava.</p>
+<p>Ele sorriu e veio na minha direção, cambaleando. Quando se abaixou para me pegar, pisei no peito dele, usei o apoio e acertei o queixo com tudo o que as deusas tinham posto naquele corpo.</p>
+<p>Ele apagou antes de chegar ao chão.</p>
+<p>Nada do que eu lembrava tinha me ensinado a derrubar um Conde.</p>
+<p>A Marta chegou correndo, viu o homem no chão e viu a minha cara.</p>
+<p>— Por Vita, Lucca! Como você…?</p>
+<p>A Marta separa depressa o que importa. Ela me pegou por baixo dos braços e me levou até a porta da cozinha.</p>
+<p>— Entra e põe a tranca. Eu vou chamar a Condessa.</p>
+<p>— Não alcanço.</p>
+<p>— Puxa o banco. Sobe e tranca. Corre, minha flor!</p>
+<p>Arrastei o banco, subi, e a tranca ainda ficava acima dos meus dedos. Atrás de mim, o Conde respirou como bicho acordando. O banco virou quando tentei o encosto; corri para debaixo da mesa no instante em que a porta bateu na parede.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>A raiva queimou o resto da bebedeira, e a espada saiu da bainha.</p>
+<p>— Sua pirralha maldita!</p>
+<p>Ele entrou dando golpe no ar, espalhando talher. Eu me grudei por baixo no tampo da mesa pesada, fora do alcance da lâmina. Dois golpes me pegaram de raspão. Arderam e fecharam antes de o sangue alcançar o chão. Ele não viu.</p>
+<p>Foi então que a porta do fim do corredor se escancarou.</p>
+<p>A mulher que vivia trancada saiu descalça, pálida, magra, o cabelo caído no rosto, com os olhos abertos e sem ninguém atrás deles.</p>
+<p>Só então me olhou.</p>
+<p><em>O que uma moribunda quer nessa confusão?</em>, pensei, com a caridade que o medo deixa.</p>
+<p>Viu a espada, a mesa, os meus pés escondidos, e alguma coisa nela acordou. A aura que vinha pelo corredor era azul acinzentada, sem brilho, oca no meio. Uma prata acesa subiu por cima do azul, e os olhos ganharam vida como se alguém tivesse voltado para dentro do corpo.</p>
+<p>Ela pegou uma faca caída no chão. O Conde continuava de costas, gritando para debaixo da mesa. Ela o agarrou por trás e afundou a faca na bochecha dele.</p>
+<p>Puxou. O rosto do homem abriu do osso ao canto da boca.</p>
+<p>Ele a arremessou de lado, levou a mão à cara e virou.</p>
+<p>— Maldita!</p>
+<p>Debaixo da mesa eu vi inteiro.</p>
+<p>Não vou escrever o que a espada fez. Nem com duas vidas de palavras achei uma para isso. A vida dela saiu em segundos; é a única misericórdia que tenho para registrar daquela madrugada.</p>
+<p>Depois veio o som da casa. Nenhum.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>O Conde cuspiu de lado, segurando o próprio rosto.</p>
+<p>— É por isso que eu odeio este matagal imundo!</p>
+<p>Foi para a porta no instante em que a Marta entrava por ela.</p>
+<p>— Preciso de um curador! — ele já gritava no quintal. — Cadê a minha carruagem? Se essa cicatriz ficar, eu queimo este lugar com todos dentro!</p>
+<p>Saí de baixo da mesa quando a Marta me chamou pelo nome duas vezes, e as pernas não sustentaram.</p>
+<p>A Marta caiu de joelhos ao lado do corpo, e o que saiu dela foi uma coisa quebrando em voz alta.</p>
+<p>— Flávia… Por Vita… Flavinha… — puxava os próprios cabelos. — Lucca, me perdoe… Não… Não…</p>
+<p>Guardei todas sem entender nenhuma, e cinco anos depois cada uma veio me cobrar.</p>
+<p>Eu sabia o que precisava ser feito. Saber não ajudou as pernas.</p>
+<p>Bati duas vezes no rosto da Marta, com a mão aberta.</p>
+<p>— Olha para mim. Água fervida. Toalha limpa. Linha e agulha grossa.</p>
+<p>— Ela morreu.</p>
+<p>— Eu sei. Não vai para a terra assim.</p>
+<p>A Marta ficou de pé porque eu não conseguia.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Ajoelhei ao lado do corpo e pedi às deusas que aquela mulher encontrasse uma vida menos cruel que a que acabava de deixar.</p>
+<p>A culpa chegou junto: <em>foi o meu grito que o acordou; foi por minha causa que ela saiu do quarto.</em></p>
+<p>Elas me confortaram, sem voz: o silêncio mudou de forma em volta de mim.</p>
+<p>A Condessa Catarina chegou com o filho atrás e parou na porta da cozinha.</p>
+<p>— Flávia… — murmurou.</p>
+<p>Nenhuma surpresa. Nos olhos dela, uma tristeza cansada.</p>
+<p>— Alfredo, volte para a casa principal e tranque as portas. Não deixe ninguém vir para cá.</p>
+<p>Agachou-se ao meu lado, com sangue na barra do vestido.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Costurei o corpo. A Condessa enxugava com os próprios lenços de seda; a Marta passava linha e agulha.</p>
+<p>Errei o buraco da agulha duas vezes. Na terceira, a Condessa segurou a minha mão entre as duas dela sem dizer que estava ajudando.</p>
+<p>Aquela mulher ia para a terra inteira e limpa.</p>
+<p>No último nó, olhei o rosto jovem que já endurecia e o corpo de três anos ganhou de mim. Uma lágrima. Uma só, com a agulha ainda na mão. Depois voltei ao trabalho, porque era o único lugar onde dava para ficar.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Enterraram-na na mesma tarde, com o sol se pondo. Sem cortejo. Sem doutrinário de fora. Sem nome dito em voz alta.</p>
+<p>A esposa do assassino estava ao lado da cova. A Marta jogou terra. Eu tentei, e a pá pesava mais do que eu; ela pôs as mãos por cima das minhas e jogamos juntas.</p>
+<p>Fiz a conta com o barulho da terra caindo.</p>
+<p>O homem que fez aquilo julgava os crimes dali. Para ela, não haveria queixa, castigo nem nome na pedra. Para ele, uma cicatriz.</p>
+<p>Eu precisaria construir o resto.</p>
+<p>Ou comprar.</p>
+</article>
+<nav class="passos"><a href="cap00-prologo-reencarnacao.html">&larr; Prólogo: Reencarnação</a><a href="index.html">sumário</a><a href="cap02-interludio-i-marco-rossini-ii-a-conta-da-noite.html">INTERLÚDIO I — MARCO ROSSINI II · A conta da noite &rarr;</a></nav>
+</main>
+</body>
+</html>

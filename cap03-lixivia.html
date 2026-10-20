@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lixívia — Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</title>
+<style>
+:root { --fundo: #faf8f3; --texto: #23201b; --suave: #6b6458;
+        --linha: #ddd6c8; --botao: #2f5d50; --botao-texto: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #161513; --texto: #e8e3d9; --suave: #a39b8c;
+          --linha: #34312c; --botao: #7fb8a4; --botao-texto: #10201b; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 1.125rem/1.7 Georgia, 'Times New Roman', serif; }
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+a { color: inherit; }
+.obra { display: block; font-size: .9rem; line-height: 1.4;
+        color: var(--suave); text-decoration: none; }
+.capa { display: block; width: 100%; height: auto; margin: 1.25rem 0 0;
+        border-radius: .5rem; }
+.rotulo { margin: 2rem 0 0; font-size: .85rem; letter-spacing: .12em;
+          color: var(--suave); font-weight: normal; }
+h1, h2 { line-height: 1.3; }
+h1 { margin: .25rem 0 1.5rem; font-size: 1.6rem; }
+h2 { margin: 2.5rem 0 .5rem; font-size: 1.2rem; }
+.copiar, .so-autor { display: none; }
+.autor .so-autor { display: block; }
+.autor .copiar { position: sticky; top: 0; z-index: 1; display: flex;
+                 gap: .5rem; padding: .6rem 0; background: var(--fundo);
+                 border-bottom: 1px solid var(--linha); }
+.copiar button { flex: 1; padding: .7rem .5rem; border: 0;
+                 border-radius: .5rem; background: var(--botao);
+                 color: var(--botao-texto);
+                 font: 600 .95rem system-ui, sans-serif; }
+.pov { color: var(--suave); }
+.cena { margin: 2rem 0; color: var(--suave); }
+nav.passos { display: flex; justify-content: space-between; gap: 1rem;
+             margin-top: 3rem; padding-top: 1rem;
+             border-top: 1px solid var(--linha); font-size: .95rem; }
+ol.sumario { padding-left: 0; list-style: none; }
+ol.sumario li { padding: .4rem 0; border-bottom: 1px solid var(--linha); }
+ol.sumario .n { display: inline-block; min-width: 4.5rem;
+                color: var(--suave); font-size: .9rem; }
+.vazio, .nota { color: var(--suave); }
+</style>
+<script>
+(function () {
+  var q = location.search, chave = 'lucca-webnovel-autor', ligado = false;
+  var autor = /[?&]autor(?:[=&]|$)/.test(q);
+  var leitor = /[?&]leitor(?:[=&]|$)/.test(q);
+  try {
+    if (autor) { localStorage.setItem(chave, '1'); }
+    if (leitor) { localStorage.removeItem(chave); }
+    ligado = localStorage.getItem(chave) === '1';
+  } catch (e) {}
+  if (autor) { ligado = true; }
+  if (leitor) { ligado = false; }
+  if (ligado) { document.documentElement.className += ' autor'; }
+})();
+
+function aviso(botao, texto) {
+  if (!botao.getAttribute('data-rotulo')) {
+    botao.setAttribute('data-rotulo', botao.textContent);
+  }
+  botao.textContent = texto;
+  setTimeout(function () {
+    botao.textContent = botao.getAttribute('data-rotulo');
+  }, 3000);
+}
+function copiar(id, botao) {
+  var el = document.getElementById(id);
+  function selecionar() {
+    var r = document.createRange();
+    r.selectNodeContents(el);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    if (ok) { s.removeAllRanges(); aviso(botao, 'Copiado ✓'); }
+    else { aviso(botao, 'Selecionado: toque em Copiar'); }
+  }
+  if (navigator.clipboard && window.ClipboardItem) {
+    var item = new ClipboardItem({
+      'text/html': new Blob([el.innerHTML], {type: 'text/html'}),
+      'text/plain': new Blob([el.innerText], {type: 'text/plain'})
+    });
+    navigator.clipboard.write([item]).then(
+      function () { aviso(botao, 'Copiado ✓'); }, selecionar);
+  } else {
+    selecionar();
+  }
+}
+function copiarTitulo(botao) {
+  var texto = botao.getAttribute('data-titulo');
+  function antigo() {
+    var a = document.createElement('textarea');
+    a.value = texto;
+    a.setAttribute('readonly', '');
+    a.style.position = 'fixed';
+    a.style.opacity = '0';
+    document.body.appendChild(a);
+    a.select();
+    a.setSelectionRange(0, texto.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(a);
+    aviso(botao, ok ? 'Copiado ✓' : 'Não copiou');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(
+      function () { aviso(botao, 'Copiado ✓'); }, antigo);
+  } else {
+    antigo();
+  }
+}
+</script>
+</head>
+<body>
+<main>
+<a class="obra" href="index.html">Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</a>
+<img class="capa" src="img/03-lixivia.jpg" alt="Ilustração do capítulo: Lixívia">
+<p class="rotulo">CAPÍTULO 3</p>
+<h1>Lixívia</h1>
+<div class="copiar"><button type="button" data-titulo="Capítulo 3 — Lixívia" onclick="copiarTitulo(this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
+<article id="texto">
+<p class="pov"><strong>Lucca · 3 anos · janeiro de 2943</strong></p>
+<p>A Flávia foi para a terra na mesma tarde, com o sol já se pondo e sem que ninguém dissesse o nome inteiro dela.</p>
+<p>Eu tinha costurado o corpo de manhã. À noite queria a mancha fora do chão da minha casa.</p>
+<p>Na cozinha da casa das empregadas, o assoalho era de ripas largas, escuras de tanto pé. No meio delas havia um pedaço que não era escuro de pisar.</p>
+<p>A Marta esfregara aquilo antes do enterro e recomeçara quando voltamos: água quente, areia, a escova de piaçava dos tachos, até um dedo abrir e sangrar.</p>
+<p>A mancha estava maior.</p>
+<p>Pus a mão na ripa ainda úmida. O sangue entrara nas fendas, e a Marta só conseguira empurrar a lembrança mais fundo.</p>
+<p><em>A água quente cozinhou.</em></p>
+<p>— Marta. Vocês lavam roupa com quê?</p>
+<p>— Com barrela, ué.</p>
+<p>— O que é barrela?</p>
+<p>— Cinza do forno com água. Deixa de molho, coa no pano, molha a roupa e bate na pedra. — Fungou. — Tira suor, tira leite, tira barro. Não tira isso aí.</p>
+<p>O que elas chamavam de barrela era fraco. O que começava a se formar na minha cabeça não era.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Eu tinha três anos e a altura de um banco. Fui até o forno mesmo assim.</p>
+<p>Debaixo dele, uma cova guardava cinza de anos: madeira grossa, que queimava devagar e deixava um pó branco, quase azulado.</p>
+<p><em>Essa. Não a preta.</em></p>
+<p>Da outra vida eu lembrava do cheiro de um tacho de cobre, e de uma velha mandando que eu saísse de perto para não ficar cega.</p>
+<p>O que servia chegou enquanto eu enchia o balde.</p>
+<p><em>Ferve a água antes.</em></p>
+<p><em>Coa pela cinza. Depois passa o que saiu por cinza nova.</em></p>
+<p><em>Sete vezes.</em></p>
+<p>Nada falou comigo. As coisas só apareciam já sabidas, como lembrança de coisa que eu nunca aprendera. Era Libra. Eu reconhecia a mesma calma que me encontrava quando uma conta fechava.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>A Marta me achou tarde da noite empilhando lenha e quase teve um troço. Quando entendeu que eu não ia dormir, suspirou e foi buscar o barril furado de escorrer requeijão.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Trabalhamos a noite inteira: eu mandava e ela fazia, porque minhas mãos não alcançavam quase nada.</p>
+<p>Palha no fundo do barril. Pano sobre a palha. Cinza branca sobre o pano. A Marta verteu a água fervida devagar, e embaixo saiu um caldo amarelo, escorregadio entre os dedos. Guardamos o caldo. Trocamos a cinza. Fervemos o mesmo líquido e passamos outra vez.</p>
+<p>— De novo? — ela perguntou na terceira.</p>
+<p>— De novo.</p>
+<p>Na quinta, parou de perguntar.</p>
+<p>Na sexta passagem errei a borda do banco, e a Marta me segurou pela roupa antes da queda.</p>
+<p>— Se quebrar o pescoço, não termina nada.</p>
+<p>Na sétima passagem, uma gota mordeu a ponta do meu dedo, e a Marta puxou a minha mão para dentro da bacia.</p>
+<p>Havia um ovo do dia na despensa. Pedi que trouxesse e o deitei na panela. Ele boiou com um pedaço da casca para fora, do tamanho de uma moeda de cobre.</p>
+<p><em>Está pronto.</em></p>
+<p>Eu ri. A Marta se benzeu. Um ovo acabara de medir o que ninguém naquela casa sabia nomear.</p>
+<p>— Você gastou a lenha da semana — ela disse. — E a cinza toda do forno.</p>
+<p>Essa conta ficaria para depois.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>O sol começava a entrar quando a Condessa chegou e parou no vão da cozinha. Viu o barril, o chão coberto de pó branco e o punho queimado da minha roupa.</p>
+<p>— O que é isso?</p>
+<p>— Água de cinza, madame — a Marta respondeu depressa. — Barrela.</p>
+<p>— Isso não é barrela.</p>
+<p>Peguei a caneca de barro com as duas mãos e despejei na mancha, da beirada para o centro.</p>
+<p>O chão chiou baixo. Uma espuma parda levantou sobre o sangue, cheia de bolhas largas. O cheiro da cozinha mudou.</p>
+<p>A Marta caiu de joelhos.</p>
+<p>— Por Vita!</p>
+<p>A Condessa recuou um passo.</p>
+<p>— Lucca. Isso é feitiçaria?</p>
+<p>— Não, madame. É cinza e água.</p>
+<p>— Resto de fogo e água não faz isso.</p>
+<p>— Faz, se passar a noite inteira fazendo direito.</p>
+<p>Esfreguei com a piaçava até o braço tremer. A Marta tomou a escova de mim, enxaguou três vezes e passou vinagre, como pedi.</p>
+<p>Quando secou, o sangue tinha saído. Ficou um claro no meio do escuro, no formato exato do corpo que estivera ali.</p>
+<p>A Marta virou o rosto. A Condessa continuou olhando. Eu olhei para a madeira.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>— Onde você aprendeu isso? — a Condessa perguntou.</p>
+<p>— Veio na minha cabeça. Sem voz. Como lembrança.</p>
+<p>— Você sabe o que é a Inquisição, menina?</p>
+<p>— Sei que some com gente.</p>
+<p>— Uma criança de três anos que faz água comer sangue é o tipo de coisa de que eles gostam. Não interessa o que é. Interessa o que parece.</p>
+<p>— Então isso não sai daqui.</p>
+<p>— Isso o quê?</p>
+<p>— A água. Queima a mão de quem não sabe. Se uma lavadeira usar errado, perde os dedos, e a culpa chega até mim.</p>
+<p>— Mas, com sebo, ela vira outra coisa — continuei. — Ferve junto, descansa por semanas e endurece. Uma pedra que espuma, tira cheiro e não come a mão.</p>
+<p>— Sabão — disse a Condessa.</p>
+<p>— Melhor que o que tem aqui. E dá para vender.</p>
+<p>— Para quem, minha flor? — perguntou a Marta.</p>
+<p>— Para todo mundo que se lava com areia.</p>
+<p>— Por que você quer pôr preço nisso? — perguntou a Condessa.</p>
+<p>— Porque eu não tenho dinheiro.</p>
+<p>— Você tem três anos.</p>
+<p>— Por isso mesmo. — Apontei o claro no chão. — Ontem eu não tive dinheiro, nem nome, nem força para impedir nada. Só pude costurar. Não quero costurar mais ninguém, madame. Quero poder comprar o que faltar.</p>
+<p>— Comprar o quê?</p>
+<p>— Guarda. Silêncio. Juiz. O que for necessário.</p>
+<p>A Marta saiu da cozinha sem que ninguém mandasse.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>A Condessa ajeitou a saia.</p>
+<p>— Você quer ajuda para fazer essa pedra? Moedas?</p>
+<p>— Não. Moeda acaba e eu preciso pedir outra vez. Duas coisas: a banha que os caçadores trazem. E tempo, sem ninguém me chamar no meio.</p>
+<p>— É a coisa mais cara que podia ter pedido.</p>
+<p>Foi embora sem dizer se daria.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>A Marta voltou com o almoço quando o sol já estava alto e me achou dormindo no chão, encostada na parte clara.</p>
+<p>Acordei com fome e com uma conta atravessada na cabeça. Um pote de banha dava umas trinta barras. Trinta barras não eram empresa nenhuma.</p>
+<p>Eu precisava de gordura que ninguém quisesse comer. A banha daquela casa chegava pela mão do Ercole, e foi a Marta quem me contou que ele era a metade que sobrara de uma dupla: o irmão entrara no mato havia dois invernos, e o que voltou não encheu um saco. Ninguém tratava aquilo como notícia. Para mim, era o preço.</p>
+<p>Eu não sabia caçar, não levantava um balde cheio e não alcançava a mesa.</p>
+<p>Depois comecei a contar quanto tempo levaria para alcançar a mesa.</p>
+</article>
+<nav class="passos"><a href="cap02-interludio-i-marco-rossini-ii-a-conta-da-noite.html">&larr; INTERLÚDIO I — MARCO ROSSINI II · A conta da noite</a><a href="index.html">sumário</a><a href="cap04-interludio-ii-padre-francesco-o-ofertorio.html">INTERLÚDIO II — PADRE FRANCESCO · O ofertório &rarr;</a></nav>
+</main>
+</body>
+</html>

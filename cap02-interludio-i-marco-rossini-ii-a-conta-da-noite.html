@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INTERLÚDIO I — MARCO ROSSINI II · A conta da noite — Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</title>
+<style>
+:root { --fundo: #faf8f3; --texto: #23201b; --suave: #6b6458;
+        --linha: #ddd6c8; --botao: #2f5d50; --botao-texto: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #161513; --texto: #e8e3d9; --suave: #a39b8c;
+          --linha: #34312c; --botao: #7fb8a4; --botao-texto: #10201b; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto);
+       font: 1.125rem/1.7 Georgia, 'Times New Roman', serif; }
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+a { color: inherit; }
+.obra { display: block; font-size: .9rem; line-height: 1.4;
+        color: var(--suave); text-decoration: none; }
+.capa { display: block; width: 100%; height: auto; margin: 1.25rem 0 0;
+        border-radius: .5rem; }
+.rotulo { margin: 2rem 0 0; font-size: .85rem; letter-spacing: .12em;
+          color: var(--suave); font-weight: normal; }
+h1, h2 { line-height: 1.3; }
+h1 { margin: .25rem 0 1.5rem; font-size: 1.6rem; }
+h2 { margin: 2.5rem 0 .5rem; font-size: 1.2rem; }
+.copiar, .so-autor { display: none; }
+.autor .so-autor { display: block; }
+.autor .copiar { position: sticky; top: 0; z-index: 1; display: flex;
+                 gap: .5rem; padding: .6rem 0; background: var(--fundo);
+                 border-bottom: 1px solid var(--linha); }
+.copiar button { flex: 1; padding: .7rem .5rem; border: 0;
+                 border-radius: .5rem; background: var(--botao);
+                 color: var(--botao-texto);
+                 font: 600 .95rem system-ui, sans-serif; }
+.pov { color: var(--suave); }
+.cena { margin: 2rem 0; color: var(--suave); }
+nav.passos { display: flex; justify-content: space-between; gap: 1rem;
+             margin-top: 3rem; padding-top: 1rem;
+             border-top: 1px solid var(--linha); font-size: .95rem; }
+ol.sumario { padding-left: 0; list-style: none; }
+ol.sumario li { padding: .4rem 0; border-bottom: 1px solid var(--linha); }
+ol.sumario .n { display: inline-block; min-width: 4.5rem;
+                color: var(--suave); font-size: .9rem; }
+.vazio, .nota { color: var(--suave); }
+</style>
+<script>
+(function () {
+  var q = location.search, chave = 'lucca-webnovel-autor', ligado = false;
+  var autor = /[?&]autor(?:[=&]|$)/.test(q);
+  var leitor = /[?&]leitor(?:[=&]|$)/.test(q);
+  try {
+    if (autor) { localStorage.setItem(chave, '1'); }
+    if (leitor) { localStorage.removeItem(chave); }
+    ligado = localStorage.getItem(chave) === '1';
+  } catch (e) {}
+  if (autor) { ligado = true; }
+  if (leitor) { ligado = false; }
+  if (ligado) { document.documentElement.className += ' autor'; }
+})();
+
+function aviso(botao, texto) {
+  if (!botao.getAttribute('data-rotulo')) {
+    botao.setAttribute('data-rotulo', botao.textContent);
+  }
+  botao.textContent = texto;
+  setTimeout(function () {
+    botao.textContent = botao.getAttribute('data-rotulo');
+  }, 3000);
+}
+function copiar(id, botao) {
+  var el = document.getElementById(id);
+  function selecionar() {
+    var r = document.createRange();
+    r.selectNodeContents(el);
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    if (ok) { s.removeAllRanges(); aviso(botao, 'Copiado ✓'); }
+    else { aviso(botao, 'Selecionado: toque em Copiar'); }
+  }
+  if (navigator.clipboard && window.ClipboardItem) {
+    var item = new ClipboardItem({
+      'text/html': new Blob([el.innerHTML], {type: 'text/html'}),
+      'text/plain': new Blob([el.innerText], {type: 'text/plain'})
+    });
+    navigator.clipboard.write([item]).then(
+      function () { aviso(botao, 'Copiado ✓'); }, selecionar);
+  } else {
+    selecionar();
+  }
+}
+function copiarTitulo(botao) {
+  var texto = botao.getAttribute('data-titulo');
+  function antigo() {
+    var a = document.createElement('textarea');
+    a.value = texto;
+    a.setAttribute('readonly', '');
+    a.style.position = 'fixed';
+    a.style.opacity = '0';
+    document.body.appendChild(a);
+    a.select();
+    a.setSelectionRange(0, texto.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(a);
+    aviso(botao, ok ? 'Copiado ✓' : 'Não copiou');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(
+      function () { aviso(botao, 'Copiado ✓'); }, antigo);
+  } else {
+    antigo();
+  }
+}
+</script>
+</head>
+<body>
+<main>
+<a class="obra" href="index.html">Lucca: Como vendi sabão em outro mundo e criei a maior empresa de todas</a>
+<img class="capa" src="img/02-a-conta-da-noite.jpg" alt="Ilustração do capítulo: INTERLÚDIO I — MARCO ROSSINI II · A conta da noite">
+<p class="rotulo">CAPÍTULO 2</p>
+<h1>INTERLÚDIO I — MARCO ROSSINI II · A conta da noite</h1>
+<div class="copiar"><button type="button" data-titulo="Capítulo 2 — INTERLÚDIO I — MARCO ROSSINI II · A conta da noite" onclick="copiarTitulo(this)">Copiar título</button><button type="button" onclick="copiar('texto', this)">Copiar texto</button></div>
+<article id="texto">
+<p class="pov"><strong>Marco Rossini II · 17 anos · Lucca · 3 anos · janeiro de 2943</strong></p>
+<p>Eu estava fechando a compra do ferro quando os cascos entraram no pátio.</p>
+<p>Rápido demais: sem corneta, sem grito no portão.</p>
+<p>Larguei a pena e desci. Dois guardas e um moço da estrebaria seguravam lamparinas.</p>
+<p>A primeira coisa que vi foram os cavalos: cabeça baixa, tremor nas patas, espuma seca na boca. Cavalo bom não termina assim uma viagem de um dia.</p>
+<p><em>Noventa quilômetros. Sem troca. Saíram da fazenda antes do sol.</em></p>
+<p>Meu pai desceu sozinho, com um pano apertado contra o lado esquerdo da cara, e o pano não era branco havia muito tempo. No assoalho da carruagem havia uma poça preta, já pastosa, do tamanho de um prato. Ele tinha sangrado ali dentro o dia inteiro.</p>
+<p>Virou para os guardas o olho que ainda abria direito.</p>
+<p>— O que vocês estão olhando?</p>
+<p>Os três encontraram serviço em outro lugar. Puxei o pano da cara dele sem pedir licença. Ele xingou. Mas deixou.</p>
+<p>O corte começava sob o osso da bochecha e ia até quase o canto da boca. A lâmina rasgara em vez de cortar. Embaixo, no queixo, havia outra marca: roxa, redonda, pequena demais para punho de homem. Eu tinha dezessete anos. Conhecia carne desde os onze.</p>
+<p>— Isso não foi espada.</p>
+<p>— Foi faca de cozinha.</p>
+<p>— E o queixo?</p>
+<p>— O estribo.</p>
+<p>Esperei. Meu pai nunca aprendeu a suportar silêncio.</p>
+<p>— A magra me pulou por trás. A que ficava trancada no quarto do fim do corredor.</p>
+<p>— E o senhor?</p>
+<p>— Eu me defendi.</p>
+<p>— O senhor a matou.</p>
+<p>— Eu me defendi — repetiu.</p>
+<p>— Baixe a voz. — Havia luz na janela da governanta. — O senhor foi rasgado por uma mulher magra, com uma faca de cozinha, dentro da propriedade da minha mãe. Isso não é notícia de morte. É notícia de piada. E piada anda mais depressa.</p>
+<p>— Eu sou o Conde.</p>
+<p>— É. Suba.</p>
+<p>— Água quente nesse assoalho — gritei. — Esfregue até sair.</p>
+<p>Foi a primeira coisa que errei naquela noite.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>O curador olhou o corte e disse que ferida de um dia não se costura: lava-se, deixa-se aberta, observa-se.</p>
+<p>— Costure. Não vou receber o cobrador do Ducado com a cara aberta.</p>
+<p>O curador olhou para mim. Meio segundo. Naquela casa só havia uma pessoa que às vezes mudava a ideia do Conde, e ela estava a noventa quilômetros dali; contrariá-lo na frente de um empregado custava caro, e eu calculara esse preço muitas vezes.</p>
+<p>Não disse nada. Naquela noite, calculei errado.</p>
+<p>O curador costurou. Meu pai gritou tanto que os cães uivaram.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>No dia seguinte esperei a janela de depois do almoço, meio jarro de vinho antes da violência; eu aprendera a medi-la aos nove anos.</p>
+<p>— O senhor não devia ter ido àquela fazenda.</p>
+<p>— Eu vou onde quiser nas minhas terras.</p>
+<p>— Dois Grão Vintis de sinal aos Cães de Gallow. Um Grão Vinti aos do Machado Torto. E a encomenda de Ironia: quatrocentas pontas e sessenta bestas, metade paga. Tudo para retomar La Relva na primavera.</p>
+<p>— Comprei este condado com comida, menino.</p>
+<p>— Foi o meu avô.</p>
+<p>Ele deixou passar.</p>
+<p>— Trinta homens do Barão Gatti dormem dentro da nossa muralha, em Laguna Rasa, e quem manda neles é o Capitão Stefano. Quase metade do forte. O homem que o senhor sustenta com empréstimo põe cento e cinquenta em pé.</p>
+<p>— O forte é do Coronel Nascimento.</p>
+<p>— Enquanto o senhor e o Barão estiverem do mesmo lado, aquilo é uma guarnição. Se deixarem de estar, é outra coisa. E ontem ele ganhou um motivo que moeda nenhuma paga.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>— Quem viu?</p>
+<p>— A empregada velha. A sua mãe. Os servos.</p>
+<p>— Mulher não abre queixa, e servo não tem a quem abrir.</p>
+<p>— E os homens da Vila?</p>
+<p>Eram nossos havia anos, com a ordem de olhar para a Condessa e para a moça do quarto do fim do corredor.</p>
+<p>— São nossos — disse meu pai.</p>
+<p>— São nossos e bebem na bodega. Na bodega há mercador. Não perguntei se são leais. Perguntei se são calados. O senhor nunca soube a diferença.</p>
+<p>— Não vai haver o que contar. Mandei a sua mãe enterrar a mulher lá mesmo, sem cortejo e sem doutrinário de fora. Ninguém naquela vila abre a boca para dizer de quem ela era filha. Morreu uma criada da casa.</p>
+<p>— A minha mãe aceitou isso?</p>
+<p>— Com uma condição. Não ponho mais os pés naquela fazenda.</p>
+<p>— E o senhor aceitou.</p>
+<p>— Eu estava sangrando, menino.</p>
+<p>Refiz a conta. Uma mulher sem sobrenome não tinha pai. Um pai que não sabia não cobrava. Um Barão que não cobrava deixava os trinta homens sobre a muralha na primavera. Era sujo, barato e funcionava.</p>
+<p>— E o que o senhor foi fazer lá?</p>
+<p>— Buscar a sua mãe. Esposa tem obrigação. Faz anos que aquela mulher se esconde num pasto e manda recado dizendo que está doente.</p>
+<p>— Deixe o acordo funcionar — eu disse, levantando. — Não volte lá. E não pague indulgência com o nome dela escrito. Doutrinário escreve. O que fica escrito a Inquisição lê.</p>
+<p>Eu já estava à porta quando ele falou outra vez.</p>
+<p>— Tinha uma pirralha no quintal. Três, quatro anos. Ela gritou.</p>
+<p>E eu, que fazia aquilo desde os onze, calculei sem querer.</p>
+<p><em>Três anos. Anda. Dentes bons. Um Vinti em Porto-Fé. Dois, se for esperta.</em></p>
+<p>Logo atrás veio a segunda linha, a única regra da casa que meu pai nunca quebrara: <em>Nunca da nossa terra.</em></p>
+<p>A menina valia um Vinti e não valia nada, as duas coisas ao mesmo tempo, porque era nossa. Quando percebi o que acabara de fazer, fechei a boca.</p>
+<p>— Sei lá de quem é — continuou meu pai. — Aquele mato está cheio de filho de servo.</p>
+<p>— O senhor encostou nela?</p>
+<p>— Que diferença faz?</p>
+<p>— Toda. Filho de servo tem pai.</p>
+<p>— Não encostei em ninguém.</p>
+<p>Não acreditei. Ainda era mais barato não acreditar em silêncio.</p>
+<p class="cena" style="text-align:center">* * *</p>
+<p>Vittoria, a governanta, me chamou ao pátio no fim daquela tarde.</p>
+<p>Tinham lavado três vezes com água quente. Esfregado com areia. Raspado com faca. O vermelho virara um prato preto, fundo na madeira, cercado pelos riscos de quem tentara escondê-lo.</p>
+<p>— Cinza e vinagre.</p>
+<p>— Já, senhor. Duas vezes.</p>
+<p>— Então três.</p>
+<p>— Senhor, sangue é assim. Sai enquanto está fresco. Depois é da madeira.</p>
+<p>O acordo era redondo: o silêncio da minha mãe, dos servos e dos vigias; uma criada sem sobrenome enterrada. E havia um prato preto no chão da carruagem do Conde, que qualquer moço de estrebaria entre a Cidade Capital Rossini e o Ducado veria ao baixar a cabeça para pegar o estribo. Ninguém precisava contar nada. Bastava olhar.</p>
+<p>— Mande tirar o assoalho e pôr outro.</p>
+<p>— O marceneiro vai perguntar por quê, senhor.</p>
+<p>Marceneiro comenta.</p>
+<p>— Então chame o seleiro. Mande pregar couro por cima. Couro velho, desses que já andaram na estrada. Diga que foi unha de bicho. Ninguém neste condado pensa duas vezes em unha de bicho.</p>
+<p>Vittoria achou boa ideia.</p>
+<p>Eu também achei.</p>
+</article>
+<nav class="passos"><a href="cap01-a-morte-da-mulher-do-final-do-corredor.html">&larr; A morte da mulher do final do corredor</a><a href="index.html">sumário</a><a href="cap03-lixivia.html">Lixívia &rarr;</a></nav>
+</main>
+</body>
+</html>
